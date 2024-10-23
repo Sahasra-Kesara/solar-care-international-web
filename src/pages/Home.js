@@ -19,17 +19,15 @@ export const Home = () => {
   return (
     <>
     <div className="relative h-screen overflow-hidden">
-<video 
-  autoPlay 
-  loop 
-  muted 
-  className="w-full h-auto"
->
-  <source src="https://res.cloudinary.com/dwf8ifbzs/video/upload/v1729672819/background-video_o0gyoe.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
-
+    <video 
+        autoPlay 
+        loop 
+        muted 
+        className="absolute top-0 left-0 w-full h-[92vh] object-cover"
+      >
+        <source src="/Images/background-video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       
       <div className="relative isolate px-6 pt-14 lg:px-10" >
         <div className="mx-left max-w-2xl py-15 sm:py-5">
