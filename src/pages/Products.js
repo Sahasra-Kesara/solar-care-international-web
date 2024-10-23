@@ -409,11 +409,11 @@ const Products = () => {
     >
       <div className="relative w-full md:w-48 flex justify-center items-center p-4">
         <img
-          src={product.image}
-          alt={product.name}
-          className="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none cursor-pointer"
-          onClick={() => handleImageClick(product.image)}
-        />
+  src={product.image} // Ensure this is correctly pointing to the Cloudinary URL
+  alt={product.name}
+  className="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none cursor-pointer"
+  onClick={() => handleImageClick(product.image)}
+/>
       </div>
       <div className="flex-auto p-6" data-aos="fade-up">
         <div className="flex flex-wrap">
