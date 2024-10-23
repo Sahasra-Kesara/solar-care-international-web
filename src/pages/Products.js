@@ -60,7 +60,7 @@ const Products = () => {
       id: 21,
       name: 'Metal Oxides Removal Agent',
       description: 'Biodegradable concentrated removal agent for metal oxides residues.',
-      image: '/images/products/Metal-Oxides-Removal-Agent.jpg',
+      image: 'https://res.cloudinary.com/dwf8ifbzs/image/upload/v1729672791/SC-F1_bibj1m.jpg',
       price: 110.0,
       stock: true,
       category: 'cleaning chemical',
