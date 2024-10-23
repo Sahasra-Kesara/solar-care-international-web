@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
-import PopupForm from './PopupForm';
 
 const Products = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
 
   const productList = [
@@ -300,186 +302,80 @@ const Products = () => {
     },
   ];
 
-  const categories = ['all', 'cleaning chemical','cleaning kit', 'brushes', 'robots', 'panels', 'inverters', 'others'];
-  
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
+  // Filter products based on category and search term
+  const filteredProducts = productList.filter((product) => {
+    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
-
-  const handleImageClick = (imageSrc) => {
-    setSelectedImage(imageSrc);
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleBuyNowClick = (product) => {
+  // Handle image click to show popup
+  const handleImageClick = (product) => {
     setSelectedProduct(product);
     setIsPopupVisible(true);
   };
 
-  const handleClosePopup = () => {
+  const closePopup = () => {
     setIsPopupVisible(false);
   };
 
-  const handleSubmitForm = (formData) => {
-    console.log('Form submitted:', formData);
-    // Handle form submission logic (e.g., sending data to the server)
-  };
-
-  useEffect(() => {
-    AOS.init({
-      duration: 1000, // animation duration in ms
-      easing: 'ease-in-out', // animation easing
-      once: true, // whether animation should happen only once - while scrolling down
-    });
-  }, []);
-
-
-  useEffect(() => {
-    // Add the fadeIn and zoomIn styles
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-      @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-      .modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.75); animation: fadeIn 0.3s ease-in-out; }
-      .modal img { max-width: 90%; max-height: 90%; object-fit: contain; animation: zoomIn 0.3s ease-in-out; }
-    `;
-    document.head.appendChild(style);
-
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, []);
-
-  const filteredProducts = productList.filter((product) => {
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) || product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });  
-
   return (
-    <div className="bg-gray-100 py-10">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-slate-500 to-slate-900"  data-aos="fade-up">Our Products</h1>
-        {/* Category Buttons */}
-        <div className="flex justify-center mb-6">
-  {/* Category buttons */}
-  <div className="category-buttons flex gap-4" data-aos="fade-up">
-    {categories.map((category) => (
-      <button
-        key={category}
-        onClick={() => handleCategoryChange(category)}
-        className={`px-4 py-2 rounded-md text-white font-semibold ${
-          selectedCategory === category
-            ? 'bg-slate-700 hover:bg-slate-300'
-            : 'bg-gray-300 hover:bg-gray-400 text-gray-800'
-        }`}
-      >
-        {category.charAt(0).toUpperCase() + category.slice(1)}
-      </button>
-    ))}
-  </div>
-</div>
-        
-        {/* Search Bar */}
-        <div className="flex justify-center mb-6" data-aos="fade-up">
-          <input
-            type="text"
-            placeholder="⌕ Search products..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="px-4 py-2 border rounded-lg w-full sm:w-1/2"
-          />
-        </div>
-
-        {/* Products List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up">
-  {filteredProducts.map((product) => (
-    <div
-      key={product.id}
-      className="flex flex-col md:flex-row justify-between gap-4 items-start bg-white rounded-lg shadow text-gray-500"
-      data-aos="fade-up"
-    >
-      <div className="relative w-full md:w-48 flex justify-center items-center p-4">
-        <img
-  src={product.image} // Ensure this is correctly pointing to the Cloudinary URL
-  alt={product.name}
-  className="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none cursor-pointer"
-  onClick={() => handleImageClick(product.image)}
-/>
-      </div>
-      <div className="flex-auto p-6" data-aos="fade-up">
-        <div className="flex flex-wrap">
-          <h1 className="flex-auto text-xl font-semibold dark:text-gray-500">
-            {product.name}
-          </h1>
-          <div className="text-xl font-semibold text-gray-500 dark:text-gray-300">
-            Rs.{product.price.toFixed(2)}/=
-          </div>
-          <div className="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
-            {product.stock ? 'In stock' : 'Out of stock'}
-          </div>
-        </div>
-
-        {/* Align the button to the left */}
-        <div className="flex py-2 text-sm font-medium justify-start">
-  <button
-    type="button"
-    onClick={() => handleBuyNowClick(product)}
-    className="py-1 px-3 border-2 border-slate-300 text-blue-600 hover:bg-slate-400 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out text-sm font-medium rounded-full"
-  >
-    Buy Now
-  </button>
-</div>
-
-
-
-        <hr/>
-        {/* Group the About Product Link and Description to align them to the left */}
-        <div className="Flex justify-center items-left">
-          <div className="flex">
-            <a
-              href={product.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-slate-700 hover:underline"
-            >
-              About Product
-            </a>
-          </div>
-          {/* <p className="text-sm text-gray-500 dark:text-gray-300 mt-2 text-left">
-            {product.description}
-          </p> */}
-          
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
-
+    <div className="product-container">
+      {/* Category Filter */}
+      <div className="category-filter">
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="all">All Categories</option>
+          <option value="cleaning chemical">Cleaning Chemicals</option>
+          <option value="robots">Robots</option>
+          <option value="panels">Solar Panels</option>
+          <option value="inverters">Inverters</option>
+          <option value="cleaning kit">Cleaning Kits</option>
+          <option value="brushes">Brushes</option>
+        </select>
       </div>
 
-      {/* Modal for full image */}
-      {selectedImage && (
-        <div className="modal" onClick={closeModal}>
-          <img src={selectedImage} alt="Full view" onClick={(e) => e.stopPropagation()} />
+      {/* Search Bar */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search Products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {/* Product List */}
+      <div className="product-list">
+        {filteredProducts.map((product) => (
+          <div key={product.id} className="product-card" data-aos="fade-up">
+            <img
+              src={product.image}
+              alt={product.name}
+              onClick={() => handleImageClick(product)}
+            />
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <p>${product.price}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Popup for Product Details */}
+      {isPopupVisible && selectedProduct && (
+        <div className="popup">
+          <div className="popup-content">
+            <button className="close-popup" onClick={closePopup}>X</button>
+            <img src={selectedProduct.image} alt={selectedProduct.name} />
+            <h3>{selectedProduct.name}</h3>
+            <p>{selectedProduct.description}</p>
+            <p>Price: ${selectedProduct.price}</p>
+            <a href={selectedProduct.link} target="_blank" rel="noopener noreferrer">View More</a>
+          </div>
         </div>
       )}
-
-      {/* Popup Form for buying */}
-      <PopupForm
-        isVisible={isPopupVisible}
-        onClose={handleClosePopup}
-        onSubmit={handleSubmitForm}
-        product={selectedProduct}
-      />
     </div>
   );
 };
