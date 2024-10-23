@@ -38,13 +38,13 @@ const ContactUs = () => {
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="text-primary-500 text-2xl mr-4" />
-                <a href="mailto:solarcareinternational@gmail.com" className="text-primary-500 hover:underline">
+                <a href="mailto:sahasrakesara@gmail.com" className="text-primary-500 hover:underline">
                   solarcareinternational@gmail.com
                 </a>
               </div>
               <div className="flex items-center">
               <FaEnvelope className="text-primary-500 text-2xl mr-4" />
-              <a href="mailto:info@solarcareinternational.com" className="text-primary-500 hover:underline">
+              <a href="mailto:sahasrakesara@gmail.com" className="text-primary-500 hover:underline">
                   info@solarcareinternational.com
                 </a>
                 </div>
