@@ -6,9 +6,9 @@ const projects = [
     title: 'MRS. S.A. BORALESSA - 5KW',
     content: '5/4/1/1, Huludagoda Rd, Dehiwala - Mount Lavinia',
     images: [
-      "/images/projects/pr11.jpg",
-      "/images/projects/pr12.jpg",
-      "/images/projects/pr13.jpg",
+      "/Images/projects/pr11.jpg",
+      "/Images/projects/pr12.jpg",
+      "/Images/projects/pr13.jpg",
     ],
     
   },
