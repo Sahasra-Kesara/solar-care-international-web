@@ -371,21 +371,28 @@ const Products = () => {
         {/* Category Buttons */}
         <div className="flex justify-center mb-6">
   {/* Category buttons */}
-  <div className="category-buttons flex gap-4" data-aos="fade-up">
+  <div className="category-dropdown flex gap-4" data-aos="fade-up">
+  <select
+    value={selectedCategory}
+    onChange={(e) => handleCategoryChange(e.target.value)}
+    className="px-4 py-2 rounded-md text-white font-semibold bg-slate-700 hover:bg-slate-300"
+  >
     {categories.map((category) => (
-      <button
+      <option
         key={category}
-        onClick={() => handleCategoryChange(category)}
-        className={`px-4 py-2 rounded-md text-white font-semibold ${
+        value={category}
+        className={`${
           selectedCategory === category
             ? 'bg-slate-700 hover:bg-slate-300'
             : 'bg-gray-300 hover:bg-gray-400 text-gray-800'
         }`}
       >
         {category.charAt(0).toUpperCase() + category.slice(1)}
-      </button>
+      </option>
     ))}
-  </div>
+  </select>
+</div>
+
 </div>
         
         {/* Search Bar */}

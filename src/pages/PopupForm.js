@@ -17,7 +17,7 @@ const PopupForm = ({ isVisible, onClose, onSubmit, product }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-1/3">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md sm:w-2/3 lg:w-1/3">
         <h2 className="text-xl font-semibold mb-4">Enter Buying Details</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
