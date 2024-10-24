@@ -138,18 +138,18 @@ export const Home = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 mb-10">
         {/* Left Side - Image */}
         <div data-aos="fade-up">
-        <video
-  src="./Videos/installation(2).mp4"
-  alt="Solar Installation"
-  className="max-w-full h-auto size-4/4 rounded-100"
-  autoPlay
-  muted
-  loop
->
-  Your browser does not support the video tag.
-</video>
+  <video
+    src="https://res.cloudinary.com/dwf8ifbzs/video/upload/v1729745254/installation_2_wqb4st.mp4"
+    alt="Solar Installation"
+    className="max-w-full h-auto size-4/4 rounded-100"
+    autoPlay
+    muted
+    loop
+  >
+    Your browser does not support the video tag.
+  </video>
+</div>
 
-          </div>
 
         {/* Right Side - Text */}
         <div className="flex flex-col justify-center" data-aos="fade-up">
@@ -202,17 +202,18 @@ export const Home = () => {
 
         {/* Right Side - Text */}
         <div data-aos="fade-up">
-        <video
-  src="/Videos/maintaince.mp4"
-  alt="Solar Maintenance"
-  className="max-w-full h-auto size-4/4 rounded-100"
-  autoPlay
-  muted
-  loop
->
-  Your browser does not support the video tag.
-</video>
-        </div>
+  <video
+    src="https://res.cloudinary.com/dwf8ifbzs/video/upload/v1729745221/maintaince_uyqx5t.mp4"
+    alt="Solar Maintenance"
+    className="max-w-full h-auto size-4/4 rounded-100"
+    autoPlay
+    muted
+    loop
+  >
+    Your browser does not support the video tag.
+  </video>
+</div>
+
         
       </div>
 
