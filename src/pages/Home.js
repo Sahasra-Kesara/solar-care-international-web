@@ -138,7 +138,7 @@ export const Home = () => {
         {/* Left Side - Image */}
         <div data-aos="fade-up">
         <video
-  src="/Videos/installation(2).mp4"
+  src="./Videos/installation(2).mp4"
   alt="Solar Installation"
   className="max-w-full h-auto size-4/4 rounded-100"
   autoPlay
